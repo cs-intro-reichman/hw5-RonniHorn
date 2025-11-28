@@ -53,11 +53,11 @@ public class Wordle {
             {
                 if(guess.charAt(i) == secret.charAt(j))
                 {
-                    if(i == j)
+                    if(i == j){
                         resultRow[i] = 'G';
+                    }
                     else
                         resultRow[i] = 'Y';
-                    break;
                 }   
             }
             
