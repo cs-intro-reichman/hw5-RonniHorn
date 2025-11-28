@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Wordle {
 
     // Reads all words from dictionary filename into a String array.
@@ -126,7 +128,7 @@ public class Wordle {
         char[][] results = new char[6][5];
 
         // Prepare to read from the standart input 
-        In inp = new In();
+        In inp = new In("dictionary.txt");
 
         int attempt = 0;
         boolean won = false;
@@ -149,6 +151,10 @@ public class Wordle {
                 }
             }
 
+            storeGuess(guess, guesses, attempt);
+            computeFeedback(secret, guess, results[attempt]);
+            
+            
             // Store guess and compute feedback
             // ... use storeGuess and computeFeedback
 
@@ -169,7 +175,7 @@ public class Wordle {
 
         if (!won) {
             System.out.println("Sorry, you did not guess the word.");
-            System.out.println("The secreet word was: " + secret);
+            System.out.println("The secret word was: " + secret);
         }
 
         inp.close();
