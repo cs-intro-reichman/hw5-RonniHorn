@@ -57,6 +57,7 @@ public class Wordle {
                 {
                     if(i == j){
                         resultRow[i] = 'G';
+                        break;
                     }
                     else
                         resultRow[i] = 'Y';
