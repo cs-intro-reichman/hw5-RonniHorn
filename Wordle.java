@@ -24,6 +24,7 @@ public class Wordle {
     // Hint: Pick a random index between 0 and dict.length (not including) using Math.random()
     public static String chooseSecretWord(String[] dict) {
 		int index = (int)(Math.random()*(dict.length));
+        System.out.println(dict[index]);
         return dict[index];
 
     }
@@ -47,23 +48,16 @@ public class Wordle {
     public static void computeFeedback(String secret, String guess, char[] resultRow) {
         for(int i = 0; i<5; i++)
         {
-            resultRow[i] = '_';
-        }
-        for(int i = 0; i<5; i++)
-        {
-            for(int j = 0; j<5; j++)
+            if(secret.charAt(i) == guess.charAt(i))
             {
-                if(guess.charAt(i) == secret.charAt(j))
-                {
-                    if(i == j){
-                        resultRow[i] = 'G';
-                        break;
-                    }
-                    else
-                        resultRow[i] = 'Y';
-                }   
+                resultRow[i] = 'G';
             }
-            
+            else{
+                if(containsChar(secret, guess.charAt(i)) == true)
+                    resultRow[i] = 'Y';
+                else
+                    resultRow[i] = '_';
+            }
         }
        
         
@@ -127,11 +121,11 @@ public class Wordle {
         String secret = chooseSecretWord(dict);
 
         // Prepare 2D arrays for guesses and results
-        char[][] guesses = new char[5][6];
-        char[][] results = new char[5][6];
+        char[][] guesses = new char[MAX_ATTEMPTS][WORD_LENGTH];
+        char[][] results = new char[MAX_ATTEMPTS][WORD_LENGTH];
 
         // Prepare to read from the standart input 
-        In inp = new In("dictionary.txt");
+        In inp = new In();
 
         int attempt = 0;
         boolean won = false;
